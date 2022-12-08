@@ -1,0 +1,328 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package recipemanager;
+
+import java.util.Scanner;
+import java.util.ArrayList;
+
+/**
+ *
+ * @author Freddy B
+ */
+
+public class Recipe {
+
+    private String recipeName;
+    private int servings;
+    private ArrayList<Ingredient> recipeIngredients = new ArrayList<>();
+    private double totalRecipeCalories;
+    private ArrayList<String> recipeInstructions = new ArrayList<>(); //instructions
+    
+
+//Mutators and Accessors
+
+    //recipeName
+    /**
+     *
+     * @return recipe name
+     */
+    public String getRecipeName() {
+        return recipeName;
+    }
+
+    /**
+     *
+     * @param recipeName recipe name
+     */
+    public void setRecipeName(String recipeName) {
+        this.recipeName = recipeName;
+    }
+
+    //servings
+    /**
+     *
+     * @return servings
+     */
+    public int getServings() {
+        return servings;
+    }
+
+    /**
+     *
+     * @param servings servings
+     */
+    public void setServings(int servings) {
+        this.servings = servings;
+    }
+
+    //recipeIngredients
+    /**
+     *
+     * @return recipe ingredients
+     */
+    public ArrayList<Ingredient> getRecipeIngredients() {
+        return recipeIngredients;
+    }
+
+    /**
+     *
+     * @param recipeIngredients recipe ingredients
+     */
+    public void setRecipeIngredients(ArrayList<Ingredient> recipeIngredients) {
+        this.recipeIngredients = recipeIngredients;
+    }
+
+    //totalRecipeCalories
+    /**
+     *
+     * @return total recipe calories
+     */
+    public double getTotalRecipeCalories() {
+        return totalRecipeCalories;
+    }
+
+    /**
+     *
+     * @param totalRecipeCalories total recipe calories
+     */
+    public void setTotalRecipeCalories(double totalRecipeCalories) {
+        this.totalRecipeCalories = totalRecipeCalories;
+    }
+    
+    //recipeInstructions
+    /**
+     *
+     * @return recipe instructions
+     */
+    public ArrayList<String> getRecipeInstructions() {
+        return recipeInstructions;
+    }
+
+    /**
+     *
+     * @param recipeInstructions recipe instructions
+     */
+    public void setRecipeInstructions (ArrayList<String> recipeInstructions) {
+        this.recipeInstructions = recipeInstructions;
+    }
+   
+    /**
+     *Initializing constructor
+     */
+    public Recipe () {
+        this.recipeName = "";
+        this.servings = 0; //<--- assigns value with appropriate data type
+        this.recipeIngredients = new ArrayList<>(); //<-- assigns value for empty ArrayList
+        this.totalRecipeCalories = 0.0; // assigns value with appropriate data type
+        this.recipeInstructions = new ArrayList<>(); //<- assigns instructions to ArrayList
+      
+
+    }
+
+    /**
+     *
+     * @param recipeName recipe name
+     * @param servings servings
+     * @param recipeIngredients recipe ingredients
+     * @param totalRecipeCalories total recipe calories
+     * @param recipeInstructions recipe instructions
+     */
+    public Recipe (String recipeName, int servings,
+            ArrayList<Ingredient> recipeIngredients, double totalRecipeCalories,
+            ArrayList<String> recipeInstructions) 
+    {
+        this.recipeName = recipeName;
+        this.servings = servings;
+        this.recipeIngredients = recipeIngredients;
+        this.totalRecipeCalories = totalRecipeCalories;
+        this.recipeInstructions = recipeInstructions;
+        
+    }
+    
+     /**
+     * Add instructions for a recipe
+     * 
+     * 
+     */
+    //do/while loop for adding instructions
+     
+     public void addRecipeInstructions() {
+
+        boolean addMoreInstructions = true;
+        
+        Scanner scnr = new Scanner(System.in);
+
+        do {
+            System.out.println("Please enter a recipe instruction or type 'end' if you are finished entering instructions: ");
+           String instructions = scnr.nextLine(); //allows user to input instruction or end
+
+            if (instructions.equals("end")) {
+                
+                addMoreInstructions = false; //end
+                
+                break;
+                
+            } else {
+                recipeInstructions.add(instructions); //adds instructions to array list
+                
+                addMoreInstructions = true;
+                
+            }
+
+        } while (addMoreInstructions = true);   
+    }
+     
+    
+    /**
+    *print Recipe specifications method
+    */
+    
+    public void printRecipe() {
+        int singleServingCalories;
+
+        singleServingCalories = (int) (getTotalRecipeCalories() / getServings());
+        
+        System.out.println("Recipe: " + getRecipeName()); //label + recipe name
+
+        System.out.println("Serves: " + getServings()); //label + servings
+
+        System.out.println("Ingredients: ");  //label
+
+        //pull ingredients array list
+
+        for (int i = 0; i < recipeIngredients.size(); i++){
+            
+            //assigns list to listIngredient
+           Ingredient newIngreds = recipeIngredients.get(i); 
+           
+            //assigns labels and values to ingredientDetails
+
+            //provides structor to recipe ingredients
+            
+           String ingredientDetails = ("\t Ingredient name: " + newIngreds.nameOfIngredient + 
+                   "\t Amount: " + newIngreds.ingredientAmount + 
+                   "\t Unit Measurement: " + newIngreds.unitMeasurement + 
+                   "\t Calories: " + newIngreds.numCaloriesPerAmount +
+                     "\t Total Calories: " + newIngreds.totalCalories); 
+           
+            //print labels and ingredient details
+           
+           System.out.println((i + 1) + ". "  + ingredientDetails);
+           
+        }
+        
+            //instructions
+
+            System.out.println("Instructions: "); //print label
+            
+            for (int j = 0; j < getRecipeInstructions().size(); j++) {
+                 
+                String instructions = getRecipeInstructions().get(j); //assigns list to instructions variable
+			
+                System.out.println((j + 1) + ". " + instructions); //prints numbered list of instructions
+                
+            }
+            
+            //print servings / calories
+            
+            System.out.println("Each serving has " + singleServingCalories + 
+                    " calories and a recipe total of " + getTotalRecipeCalories()
+            + " calories.");
+
+        }
+       
+    
+    
+    
+//create new recipes 
+
+    /**
+     *
+     * @return new recipe
+     */
+    
+    public Recipe createNewRecipe(){
+        
+            double totalRecipeCalories = 0; 
+            ArrayList<Ingredient> recipeIngredients = new ArrayList<>(); //recipe ingredients list
+            boolean addMoreIngredients = true;
+            
+            Ingredient ingredients = new Ingredient();
+                    
+
+            Scanner scnr = new Scanner(System.in);
+           
+            //Recipe name prompt
+                
+            System.out.println("Please enter the recipe name: ");
+           
+            String recipeName = scnr.nextLine(); //allows users to input recipe name
+            
+                setRecipeName(recipeName); //sets recipe name
+            
+              //Servings prompt
+              
+            System.out.println("Please enter the number of servings: ");
+            //allows users to input number of servings
+            int servings = scnr.nextInt();
+           
+                setServings(servings); //sets servings
+                
+             //instructions
+            
+            addRecipeInstructions(); //to add instructions
+                
+            // do / while 
+            do {
+                System.out.println(
+                        "Please enter the ingredient name or type 'end' if you are finished entering ingredients: ");
+                String ingredientName = scnr.next(); //allows for user to input either input ingredient or end
+                
+                
+                //if / elese
+                
+                if (ingredientName.toLowerCase().equals("end")) {
+                    
+                    addMoreIngredients = false; //ends
+
+                   break;
+                   
+                } else {
+                    //add ingredients
+                    
+                     recipeIngredients.add(ingredients.addIngredient());
+                    
+                     //set recipe ingredients
+                     setRecipeIngredients(recipeIngredients);
+                     
+                     //set total recipe calories
+                     setTotalRecipeCalories(getTotalRecipeCalories() + ingredients.totalCalories);
+                    
+                   
+                    addMoreIngredients = true; //keeps do/while loop going
+
+                }
+
+            } while (addMoreIngredients == true);
+            
+            //print confirmation
+       System.out.println("You have successfully added " + getRecipeName() + 
+               " to your recipe box"); 
+   
+           // print recipe
+
+           Recipe newRecipe = new Recipe(getRecipeName(),
+                    getServings(), getRecipeIngredients(), getTotalRecipeCalories(), 
+                     getRecipeInstructions());
+           
+         newRecipe.printRecipe();
+    
+return newRecipe;
+         
+    }
+
+}
+
