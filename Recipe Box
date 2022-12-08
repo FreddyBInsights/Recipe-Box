@@ -1,0 +1,247 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package recipemanager;
+
+import java.util.ArrayList;
+
+import java.util.Scanner;
+
+
+/**
+ *
+ * @author Freddy B
+ */
+
+public class RecipeBox {
+	
+	/**
+	 * 
+	 * listOfRecipes array list 
+	 * 
+         * a list of created recipes
+	 */
+    ArrayList<Recipe> listOfRecipes = new ArrayList<>();
+   
+        //listOfRecipes
+    
+    //accessor
+    /**
+     *accessor
+     * 
+     * @return list of recipes
+     */
+  public ArrayList<Recipe> getListOfRecipes(){
+        return listOfRecipes;
+  }
+    //mutator
+
+    /**
+     *mutator
+     * 
+     * @param listOfRecipes list of recipes
+     */
+     public void setListOfRecipes(ArrayList<Recipe> listOfRecipes) {
+        this.listOfRecipes = listOfRecipes;
+    }
+
+	/**
+	 * Constructor for recipe box
+	 * 
+	 */
+    
+     
+     //default constructor
+     
+     public void RecipeBox(){
+         this.listOfRecipes = new ArrayList<>();
+     }
+      
+     //overloading constructor
+
+    /**
+     *overloading constructor 
+     * 
+     * @param listOfRecipes list of recipes
+     */
+     
+      public void RecipeBox(ArrayList<Recipe> listOfRecipes){
+         this.listOfRecipes = listOfRecipes;
+      }
+      
+      //
+    /**
+     *print all details for a specific recipe method
+
+     */
+      
+      //prints all details for selected recipe 
+      
+      public void printAllRecipeDetails() {
+       
+           for (int i = 0; i < listOfRecipes.size(); i++) {
+               
+               Recipe recipe1 = new Recipe(); // recipe1 created to assign list for print
+               
+               recipe1 = listOfRecipes.get(i); //assigns list
+               
+               recipe1.printRecipe(); //details for each recipe print
+               
+		}
+	}
+        
+      
+      
+      //
+
+    /**
+     *print all recipe names method
+     */
+      
+      //prints all recipes names in recipe box
+
+	
+       public void printAllRecipeNames() {
+        
+           
+        for (int i = 0; i < listOfRecipes.size(); i++) { 
+           
+           System.out.println(listOfRecipes.get(i).getRecipeName()); //all recipes print
+           
+             }
+           
+       }
+      //
+       
+    /**
+     *create a new recipe method
+     */
+       
+       //creates new recipes utilizing createNewRecipe()
+       
+      
+    public void createNewRecipe () {
+            
+            Recipe newRecipe = new Recipe(); //new recipe
+            
+               listOfRecipes.add(newRecipe.createNewRecipe()); //adds recipes to array list/recipe box
+            
+        }
+        
+  
+      
+      
+
+    /**
+     *remove a recipe from the recipe box
+     * 
+     * users are shown the list of recipes and are able to
+     * input which one they want to remove from recipe box
+     */
+
+   //users are shown the list of recipes and are able to input which one they want to remove from recipe box
+   
+        public void removeRecipeFromBox() {
+            
+            Scanner removerScnr = new Scanner(System.in); //remover scanner created
+            
+            String recipeForRemoval = removerScnr.nextLine(); //user inputs recipe for removal
+            
+             for(int j = 0; j < listOfRecipes.size(); j++) { 
+            
+            if (listOfRecipes.get(j).getRecipeName().equals(recipeForRemoval)) { //checks recipe box
+                
+                listOfRecipes.remove(j); //input is removed if there is a match
+              
+                break;
+            }
+        }
+            
+            
+        }
+        
+        
+      
+	//MENU
+
+    /**
+     *Menu
+     * @param args the command line arguments
+     */
+	public static void main(String[] args){
+    	// Create a Recipe Box	
+	RecipeBox myRecipesBox = new RecipeBox(); //creates recipe box
+        
+        Scanner menuScnr = new Scanner(System.in);
+        
+		
+	//Print a menu for the user to select one of the three options:
+		
+		
+	System.out.println("Menu\n" + "1. Add Recipe\n" + "2. Print All Recipe Details\n" + 
+                "3. Print All Recipe Names\n" + "4. Remove Recipe From Your Recipe Box\n" +
+                "\nPlease select a menu item:"); //prints menu items
+                        
+                      
+       
+        while (menuScnr.hasNextInt() || menuScnr.hasNextLine()) { //menu scanner
+           
+                        
+            int input = menuScnr.nextInt(); //user inputs menu item number
+            
+		//if/else menu
+			
+            if (input == 1) { //To add a receipe
+                
+                myRecipesBox.createNewRecipe();
+                
+                System.out.println("Recipe Box Updated!");
+                
+            } else if (input == 2) { //To print the details for a recipe
+                
+                System.out.println("Which recipe?\n"); 
+                
+                myRecipesBox.printAllRecipeDetails(); //prints recipe details
+                
+            } else if (input == 3) {  //To print all recipe names
+                
+                System.out.println("Recipes!");
+                
+		for (int k = 0; k < myRecipesBox.listOfRecipes.size(); k++) { 
+                            
+                    System.out.println((k + 1) + ": " + myRecipesBox.listOfRecipes.get(k).getRecipeName()); 
+              
+                }
+            }else if (input == 4) {  //To remove a recipe from recipe box
+                
+                myRecipesBox.printAllRecipeNames(); //prints all recipe names
+                     
+                System.out.println("Which recipe do you want to remove?\n");
+                
+                
+                        myRecipesBox.removeRecipeFromBox(); //removes recipe
+                        
+                System.out.println("Recipe Box Updated!");
+                
+                myRecipesBox.printAllRecipeNames(); //prints updated list of recipes                                   
+                  
+            } else {
+                
+                System.out.println("\nMenu\n" + "1. Add Recipe\n" + "2. Print Recipe\n" + 
+                        "3. Adjust Recipe Servings\n" + "4. Remove Recipe From Your Recipe Box\n" + 
+                        "\nPlease select a menu item:"); //menu
+                
+            }
+            
+            System.out.println("Menu\n" + "1. Add Recipe\n" + "2. Print All Recipe Details\n" + 
+                "3. Print All Recipe Names\n" + "4. Remove Recipe From Your Recipe Box\n" +
+                "\nPlease select a menu item:"); //menu
+           
+		}
+		
+        
+	}
+
+}
