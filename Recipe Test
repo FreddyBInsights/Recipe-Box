@@ -1,0 +1,65 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package recipemanager;
+
+/*
+*author
+* Freddy B
+ */
+
+
+public class RecipeTest {
+
+	/**
+ 	* @param args the command line arguments
+ 	*/
+	public static void main(String[] args) {
+            
+            //Fuctionality test
+            
+            //Three recipes must be created
+            
+            /**
+             * Recipes
+             */
+	
+        Recipe myFirstRecipe = new Recipe().createNewRecipe(); // Creates first recipe
+      
+         
+	/**
+         * Print recipes
+         * 
+         * Check for errors and completeness
+         */
+           
+            myFirstRecipe.printRecipe(); // details printed for first recipe 
+        
+          
+            
+            //Functionality test complete
+            
+            System.out.println("Functionality test complete");
+	}
+    
+}
+/**
+ * Reflection:
+ * The recipe test will test the functionality of the recipe class
+ * 
+ * The recipe test code calls the recipe class to create
+ * new recipes. The prompts that have been outlined in the recipe class should
+ * be output.
+ * 
+ * Each recipe should print the inputted details 
+ * 
+ * Error messages signify that there is an issue with the recipe class and
+ * should be troubleshot
+ * 
+ * 
+ * Check for recipe accuracy when error messages do not pop up
+ * 
+ *
+ */
