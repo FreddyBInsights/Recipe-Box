@@ -1,0 +1,284 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package recipemanager;
+
+import java.util.Scanner;
+
+
+
+/**
+ * @author Freddy B
+ */
+
+//Ingredient class
+public class Ingredient {
+
+     String nameOfIngredient = ""; //i.e celery, chicken, pepper
+     double  ingredientAmount = 0.0; //i.e 100.0..13.1..1
+     String unitMeasurement = ""; // i.e cups, oz, quart, tablespoon, lbs
+     int numCaloriesPerAmount = 0; // 1..2..3..4..etc.
+     double totalCalories = 0.0; //Total calories for ingredient amount
+     final double MAX_AMOUNT = 100.0; //Constant value for Max Amount is 100.0
+ 
+     //Mutators / Accessors
+    /**
+     * @return the nameOfIngredient
+     */
+   public String getNameOfIngredient() {
+        return nameOfIngredient;
+    }
+
+    /**
+     * @param nameOfIngredient the nameOfIngredient to set
+     */
+    public void setNameOfIngredient(String nameOfIngredient) {
+        this.nameOfIngredient = nameOfIngredient;
+    }
+    
+    /**
+     * @return unitMeasurement
+     */
+    public String getUnitMeasurement() {
+        return unitMeasurement;
+    }
+
+    /**
+     * @param unitMeasurement to set unit measurement
+     */
+    public void setUnitMeasurement(String unitMeasurement) {
+        this.unitMeasurement = unitMeasurement;
+    }
+
+    /**
+     * @return ingredientAmount
+     */
+    public double getIngredientAmount() {
+        return ingredientAmount;
+    }
+		
+    /**
+    *@param ingredientAmount the set the ingredient amount to
+    */
+    public void setIngredientAmount(double ingredientAmount) {
+        this.ingredientAmount = ingredientAmount;
+    }
+
+    /**
+     * @return the numberCaloriesPerUnit
+     */
+    public int getNumCaloriesPerAmount() {
+        return numCaloriesPerAmount;
+    }
+
+    /**
+     * @param numCaloriesPerAmount to set the numCaloriesPerAmount
+     */
+    public void setNumCaloriesPerAmount(int numCaloriesPerAmount) {
+        this.numCaloriesPerAmount = numCaloriesPerAmount;
+    }
+
+    /**
+     * @return the totalCalories
+     */
+    public double getTotalCalories() {
+        return totalCalories;
+    }
+    
+    /**
+     * @param totalCalories to set the totalCalories
+     */
+    public void setTotalCalories(double totalCalories) {
+        this.totalCalories = totalCalories;
+    }
+    
+   
+
+    /**
+     *Initializing Constructor
+     */
+    
+    public Ingredient() {
+        this.nameOfIngredient = "";
+        this.unitMeasurement = "";
+	this.ingredientAmount = 0;
+        this.numCaloriesPerAmount = 0;
+        this.totalCalories = 0.0;
+    }
+    
+   
+
+    /**
+     *Overloaded Constructor
+     * 
+     * @param nameOfIngredient name of ingredient
+     * @param unitMeasurement unit of measurement
+     * @param ingredientAmount ingredient amount
+     * @param numCaloriesPerAmount number of calories per ingredient amount
+     * @param totalCalories total calories
+     */
+    
+    public void Ingredient(String nameOfIngredient, String unitMeasurement, 
+        double ingredientAmount, int numCaloriesPerAmount, double totalCalories) {
+        this.nameOfIngredient = nameOfIngredient;
+        this.unitMeasurement = unitMeasurement;
+	this.ingredientAmount = ingredientAmount;
+        this.numCaloriesPerAmount = numCaloriesPerAmount;
+        this.totalCalories = totalCalories;
+    }
+    
+    /**
+     *
+     * @return new ingredient 
+     */
+    public Ingredient addIngredient() {
+       Scanner scnr = new Scanner(System.in);
+       
+       Ingredient newIngredient = new Ingredient();
+       
+       //user will input name of ingredient
+      System.out.println("Please enter the name of the ingredient: ");
+      
+      nameOfIngredient = scnr.next();
+      
+      setNameOfIngredient(nameOfIngredient); //set ingredient name
+      
+       
+       /**user will input unitMeasurement for ingredient
+        * users will be given possible options to choose from
+        */
+       
+       System.out.println("Which unit of measurement is used for your ingredient?");
+       System.out.println("lb(s)");
+       System.out.println("cup(s)");
+       System.out.println("ounce(s)");
+       System.out.println("tablespoon(s)");
+       System.out.println("teaspoon(s)");
+       
+       System.out.println("The unit measurement for " + getNameOfIngredient() + 
+               " is: "); 
+       unitMeasurement = scnr.next();
+        
+       setUnitMeasurement(unitMeasurement); //set unit measurement
+       
+       /**user will input ingredient amount 
+       *program will first ensure that user is inputting a valid number
+       */
+       
+       System.out.println("*VALIDITY CHECK*");
+
+       System.out.println(
+      "Please enter the number of " + getUnitMeasurement() + "(between 1 and 100): ");
+       
+   /**The following "if branch" uses the scanner method hasNextDouble() to
+     *check to see if the input is an Double.
+     */ 
+    
+       if (scnr.hasNextDouble()) {
+           ingredientAmount = scnr.nextDouble(); //allows for user input
+               
+       if ((ingredientAmount >= 1) && (ingredientAmount <= MAX_AMOUNT)) {
+                  System.out.println(ingredientAmount + " is a valid number of " 
+                          + getUnitMeasurement() + " !"); //valid number
+                 
+                  setIngredientAmount(ingredientAmount); //set ingredient amount
+                
+                
+       }else {
+              System.out.println(ingredientAmount + 
+                          " is not a valid number of " + getUnitMeasurement()
+                          + " !");
+                  //prints when a number is invalid
+                  
+                  System.out.println("Please enter another number of" 
+                          + getUnitMeasurement() + " between 1 and 100: ");
+                  ingredientAmount = scnr.nextDouble(); 
+                                //User will be prompted again to enter a valid
+                                //number 
+             } if (ingredientAmount < 1) {
+                  System.out.println(ingredientAmount + 
+                          " is less than 1. Sorry you are out of attempts."); 
+                             //less than 1 will print the number and error
+                             
+                             System.out.println("*VALIDITY CHECK FAILED*"); 
+                                    //Signals end of check
+  
+              }else if (ingredientAmount > MAX_AMOUNT) {
+                  System.out.println(ingredientAmount + 
+                        " is greater than 100. Sorry you are out of attempts."); 
+                        //Numbers greater than 100 will print number and error 
+                        
+                        System.out.println("*VALIDITY CHECK FAILED*"); 
+                                //Signals end of check
+                                
+              }else if (ingredientAmount <= MAX_AMOUNT) {
+                  System.out.println(ingredientAmount + " is a valid number of "
+                          + getUnitMeasurement() + " !");
+                  //valid
+                          
+                 setIngredientAmount(ingredientAmount); //set ingredient amount
+                  
+                  System.out.println("*VALIDITY CHECK PASSED*"); 
+                                //Signals end of check
+   
+   
+   
+       //user will input valid ingredient amount
+       System.out.println(getIngredientAmount() + " " + getUnitMeasurement() + 
+               " of " + getNameOfIngredient() + " is needed.");
+     
+    
+       //user will input calories per unitMeasurement for ingredient
+       System.out.println("Please enter the number of calories per " + 
+               getUnitMeasurement() +" : ");
+       
+           //allows user to input calories per ingredient amount 
+           
+           numCaloriesPerAmount = scnr.nextInt();
+           
+           setNumCaloriesPerAmount(numCaloriesPerAmount); // set number of calories per amount
+        
+      
+       
+        /** 
+        * Ingredient amount multiplied by calories per chosen unit measurement 
+        * equals the total calories 
+        */
+       totalCalories = (getIngredientAmount() * getNumCaloriesPerAmount());
+       
+           setTotalCalories(totalCalories); //set totalCalories
+            
+            
+       
+      //Complete output of user provided ingredient details
+       System.out.println("You need " + getIngredientAmount() 
+       + " " + getUnitMeasurement() + " of " + getNameOfIngredient() + 
+               " which is a total of " + getTotalCalories() + " calories.");
+       
+     
+       
+       System.out.println("You have successfully recorded the details for: " 
+               + getNameOfIngredient()); //confirmation
+                   
+              }
+       }else {
+           System.out.println("Error: That is not a number. Try again.");
+          
+           //if anything other than an int is input, this error will print 
+           
+           
+           System.out.println("*VALIDITY CHECK FAILED*"); //Signals end of check
+       }
+
+   
+   return newIngredient;
+       }
+      
+}
+
+  
+
+      
+
